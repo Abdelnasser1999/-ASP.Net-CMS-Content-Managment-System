@@ -1,15 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MYCMS.Core.Constants;
+using MYCMS.Core.Dtos;
+using MYCMS.Core.Dtos.Helpers;
+using MYCMS.Infrastructure.Services.Users;
 
 namespace MYCMS.Web.Controllers
 {
     public class UserController : Controller
     {
+
+        private readonly IUserService _userService;
+
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
+        public async Task<JsonResult> GetAll(Pagination paganation , Query query)
+        {
+            var result =await _userService.GetAll(paganation, query);
+            return Json(result);
+        }
+
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -17,34 +38,42 @@ namespace MYCMS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create()
+        public async Task<IActionResult> Create([FromForm] CreateUserDto userDto)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                await _userService.Create(userDto);
+                return Ok(MyResults.AddSuccessResult());
+            }
+            return View(userDto);
         }
 
         [HttpGet]
-        public IActionResult Update()
+        public async Task<IActionResult> Update(string id)
         {
-            return View();
+            var user =await _userService.Get(id);
+            return View(user);
         }
 
         [HttpPost]
-        public IActionResult Update()
+        public async Task<IActionResult> Update([FromForm] UpdateUserDto userDto)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                await _userService.Update(userDto);
+                return Ok(MyResults.EditSuccessResult());
+            }
+            return View(userDto);
         }
 
         [HttpGet]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            await _userService.Delete(id);
+            return Ok(MyResults.DeleteSuccessResult());
+
         }
 
-        [HttpGet]
-        public IActionResult ExportToExcel()
-        {
-            return View();
-        }
 
     }
 }
