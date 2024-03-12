@@ -8,8 +8,8 @@ namespace MYCMS.Core.Dtos.Helpers
 {
    public class Pagination
     {
-        public int PerPage { get; set; } = 10;
-        public int Page { get; set; } = 1;
+        public int PerPage { get; set; } 
+        public int Page { get; set; } 
         public int Pages { get; set; }
         public int Total { get; set; }
     }

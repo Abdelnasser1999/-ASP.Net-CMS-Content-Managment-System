@@ -48,7 +48,7 @@ var KTDatatableAutoColumnHideDemo = function () {
             columns: [{
                 field: 'fullName',
                 title: 'الاسم كامل',
-                width: 'auto'
+                width: '250'
             },{
                     field: 'email',
                     title: 'البريد ',
@@ -62,6 +62,10 @@ var KTDatatableAutoColumnHideDemo = function () {
                     field: 'phoneNumber',
                     title: 'رقم الجوال ',
                     width: 'auto'
+            },{
+                    field: 'imageUrl',
+                    title: 'الصورة ',
+                    width: '50'
             },
             {
                 field: 'Actions',
@@ -71,7 +75,7 @@ var KTDatatableAutoColumnHideDemo = function () {
                 overflow: 'visible',
                 autoHide: false,
                 template: function (data) {
-                    return '\<a  href ="/User/Update/' + data.id + '" class="PopUp btn btn-sm btn-clean btn-icon mr-2" title="تعديل  بيانات ' + data.FullName + ' ">\
+                    return '\<a  href ="/User/Update/' + data.id + '" class="PopUp btn btn-sm btn-clean btn-icon mr-2" title="تعديل  بيانات ' + data.fullName + ' ">\
                             <span class="svg-icon svg-icon-warning svg-icon-md">\
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\

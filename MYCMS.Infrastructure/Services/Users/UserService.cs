@@ -37,9 +37,11 @@ namespace MYCMS.Infrastructure.Services.Users
 
         public async Task<ResponseDto> GetAll(Pagination pagination , Query query)
         {
+            
             var queryString = _db.Users.Where(x => !x.IsDelete).AsQueryable();
 
             var dataCount = queryString.Count();
+            pagination.Total = dataCount;
             var skipValue = pagination.GetSkipValue();
             var dataList = await queryString.Skip(skipValue).Take(pagination.PerPage).ToListAsync();
             var users = _mapper.Map<List<UserViewModel>>(dataList);
@@ -89,7 +91,7 @@ namespace MYCMS.Infrastructure.Services.Users
             {
                 throw new CreateUserFailedException();
             }
-           //await _emailService.Send(user.Email, "New Account!", $"Email : {user.Email} , Password : {Password}");
+            await _emailService.Send(user.Email, "New Account!", $"Email : {user.Email} , Password : {Password}");
             return user.Id;
         }
         public async Task<string> Update(UpdateUserDto userDto)
@@ -119,9 +121,7 @@ namespace MYCMS.Infrastructure.Services.Users
             {
                 throw new EntityNotFoundException();
             }
-
-            user.IsDelete = true;
-            _db.Users.Update(user);
+            _db.Users.Remove(user);
             await _db.SaveChangesAsync();
             return user.Id;
         }

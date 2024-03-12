@@ -10,8 +10,15 @@ namespace MYCMS.Web.Data
         public CMSDbContext(DbContextOptions<CMSDbContext> options)
             : base(options)
         {
+            
         }
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Category>().HasQueryFilter(x => !x.IsDelete);
+            builder.Entity<User>()
+                   .HasQueryFilter(x => !x.IsDelete);
+        }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostAttachment> PostAttachments { get; set; }
         public DbSet<Track> Tracks { get; set; }

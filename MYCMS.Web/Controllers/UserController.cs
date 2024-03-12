@@ -24,9 +24,9 @@ namespace MYCMS.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> GetAll(Pagination paganation , Query query)
+        public async Task<JsonResult> GetAll(Pagination pagination, Query query)
         {
-            var result =await _userService.GetAll(paganation, query);
+            var result =await _userService.GetAll(pagination, query);
             return Json(result);
         }
 
