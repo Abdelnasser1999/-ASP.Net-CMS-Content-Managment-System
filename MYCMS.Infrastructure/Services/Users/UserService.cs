@@ -38,7 +38,7 @@ namespace MYCMS.Infrastructure.Services.Users
         public async Task<ResponseDto> GetAll(Pagination pagination , Query query)
         {
             
-            var queryString = _db.Users.Where(x => !x.IsDelete).AsQueryable();
+            var queryString = _db.Users.Where(x => !x.IsDelete && (x.FullName.Contains(query.GeneralSearch) ||x.PhoneNumber.Contains(query.GeneralSearch) || x.Email.Contains(query.GeneralSearch) ||string.IsNullOrWhiteSpace(query.GeneralSearch) )).AsQueryable();
 
             var dataCount = queryString.Count();
             pagination.Total = dataCount;

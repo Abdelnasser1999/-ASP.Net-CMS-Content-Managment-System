@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MYCMS.Data.Models;
 using MYCMS.Infrastructure.AutoMapper;
+using MYCMS.Infrastructure.Middlewares;
 using MYCMS.Infrastructure.Services;
 using MYCMS.Infrastructure.Services.Users;
 using MYCMS.Web.Data;
@@ -54,6 +55,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+//use middlware exception handler
+app.UseExceptionHandler(options => options.UseMiddleware<ExceptionHandler>());
 
 app.UseAuthorization();
 
