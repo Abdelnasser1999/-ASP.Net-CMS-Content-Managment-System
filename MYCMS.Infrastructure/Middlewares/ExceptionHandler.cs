@@ -42,7 +42,7 @@ namespace MYCMS.Infrastructure.Middlewares
                     response.status = 0;
                     break;       
                 default:
-                    response.msg = $"e:حدث خطأ ما";
+                    response.msg = $"e:{exception.Message} .......{exception.InnerException} ";
                     response.close = 0;
                     response.status = 0;
                     var requestBody = string.Empty;

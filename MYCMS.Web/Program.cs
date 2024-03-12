@@ -5,6 +5,7 @@ using MYCMS.Data.Models;
 using MYCMS.Infrastructure.AutoMapper;
 using MYCMS.Infrastructure.Middlewares;
 using MYCMS.Infrastructure.Services;
+using MYCMS.Infrastructure.Services.Categories;
 using MYCMS.Infrastructure.Services.Users;
 using MYCMS.Web.Data;
 
@@ -30,10 +31,11 @@ builder.Services.AddIdentity<User, IdentityRole>(config =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
-
+//services
 builder.Services.AddTransient<IEmailService,EmailService>();
 builder.Services.AddTransient<IFileService,FileService>();
 builder.Services.AddTransient<IUserService,UserService>();
+builder.Services.AddTransient<ICategoryService,CategoryService>();
 builder.Services.AddHealthChecks();
 builder.Services.AddMvc();
 
