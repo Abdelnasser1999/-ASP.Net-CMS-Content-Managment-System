@@ -20,8 +20,4 @@
     <ProjectReference Include="..\MYCMS.Infrastructure\MYCMS.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
-  </ItemGroup>
-
 </Project>
